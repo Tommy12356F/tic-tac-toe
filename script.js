@@ -66,11 +66,34 @@ const GameController = (function () {
         );
    
     };
+    const checkTie = () =>{
+        const board =Gameboard.getBoard()
+        return board.every(cell =>
+            cell !==""
+        )
+    }
 
     // EVERYTHING related to game flow lives here
+    const playRound = (index) => {
+        if ( gameOver ) return;
+        const success = Gameboard.placeMark(index, currentPlayer.marker);
+        if ( !success ) return;
+        if (checkWin()) {
+            gameOver = true;
+            return;
+        }
+        if (checkTie()){
+            gameOver = true;
+            return;
+        }
+        currentPlayer = currentPlayer === p1 ? p2 : p1; //switches player
+
+
+
+
+   
+    };
+    return { playRound };
 
 })();
 
-const playRound = (index) => {
-   
-};
