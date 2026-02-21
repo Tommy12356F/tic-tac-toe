@@ -37,8 +37,8 @@ function Player(name,marker){
 }
 
 const GameController = (function () {
-    const p1 = Player("Vedant", "X");
-    const p2 = Player("Crazy","O");
+    let p1 = Player("Vedant", "X");
+    let p2 = Player("Crazy","O");
 
     let currentPlayer=p1;
     let gameOver=false;
@@ -72,6 +72,9 @@ const GameController = (function () {
             cell !==""
         )
     }
+    const startGame = (name1, name2) => {
+
+    };
 
     // EVERYTHING related to game flow lives here
     const playRound = (index) => {
