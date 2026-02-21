@@ -74,6 +74,9 @@ const GameController = (function () {
     }
     const startGame = (name1, name2) => {
 
+        
+        
+
     };
 
     // EVERYTHING related to game flow lives here
@@ -96,7 +99,36 @@ const GameController = (function () {
 
    
     };
-    return { playRound };
+    return { playRound,startGame };
+
+})();
+
+const DisplayController = (function () {
+    const setup = document.getElementById("setup-screen");
+    const game = document.getElementById("game-screen");
+    const p1 = document.getElementById("player1-name")
+    const p2 = document.getElementById("player2-name")
+    const start = document.getElementById("start-game")
+    const reset = document.getElementById("reset")
+
+    
+    const cells = document.querySelectorAll(".cell");
+
+
+    // for each cell:
+    //     cells[i].textContent = board[i]
+    //     function render()
+    function render() {
+        const board = Gameboard.getBoard();
+        // board.every(cell => cell)
+        // board[index] === currentPlayer.marker
+        cells.forEach((cell,index)=> {
+            cell.textContent = board[index];
+
+        })
+
+    }
+
 
 })();
 
