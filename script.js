@@ -11,9 +11,17 @@ const Gameboard = (function() {
         }
 
     };
-    const reset = ()=>{
+    
+    const reset = () => {
+        board.fill("")
+        
+        
 
+         
+            
     };
+
+    
     const getBoard = ()=>{
         return board;
 
@@ -73,6 +81,13 @@ const GameController = (function () {
         )
     }
     const startGame = (name1, name2) => {
+        p1 = Player(name1, "X");
+        p2 = Player(name2, "O");
+
+        currentPlayer = p1;
+        gameOver = false;
+
+        Gameboard.reset();
 
         
         
@@ -109,10 +124,37 @@ const DisplayController = (function () {
     const p1 = document.getElementById("player1-name")
     const p2 = document.getElementById("player2-name")
     const start = document.getElementById("start-game")
-    const reset = document.getElementById("reset")
+    const reset = document.getElementById("reset");
+    start.addEventListener("click",()=>{
+        let player1=p1.value || "player1"
+        let player2=p2.value || "player2"
+        GameController.startGame(player1, player2)
+        setup.classList.add("hidden");
+        game.classList.remove("hidden");
+        render();
+
+
+
+
+
+    })
+    reset.addEventListener("click",()=>{
+        
+        GameController.startGame(p1.value, p2.value);
+        render()
+    })
+
 
     
     const cells = document.querySelectorAll(".cell");
+    cells.forEach(cell => {
+        cell.addEventListener("click", () => {
+            const i = Number(cell.dataset.index)
+            GameController.playRound(i);
+            render()
+
+        });
+    });
 
 
     // for each cell:
@@ -124,10 +166,13 @@ const DisplayController = (function () {
         // board[index] === currentPlayer.marker
         cells.forEach((cell,index)=> {
             cell.textContent = board[index];
+            cell.style.color= "white"
 
         })
 
     }
+    render();
+
 
 
 })();
